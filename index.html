@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>打妹妹</title>
     <style>
-      html, body {
+      html,
+      body {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -31,10 +32,12 @@
       }
     </style>
     <script>
-      const playlist = [
+      const firstThree = [
         "first_blood.wav",
         "double_kill.wav",
         "triple_kill.wav",
+      ];
+      const theRest = [
         "killing_spree.wav",
         "dominating.wav",
         "mega_kill.wav",
@@ -59,8 +62,17 @@
         "god_like.wav": "God Like!",
         "holy_shit.wav": "Holy Shit!",
       }
+      let upcoming = Array.from(firstThree);
       function playSound(e) {
-        const nextSound = playlist.shift() || "ownage.wav";
+        if (upcoming.length == 0) {
+          const tmp = Array.from(theRest);
+          do {
+            let i = Math.floor(Math.random()*tmp.length);
+            let next = tmp.splice(i, 1);
+            upcoming = upcoming.concat(next);
+          } while (tmp.length > 0);
+        }
+        const nextSound = upcoming.shift()
         const snd = new Audio(nextSound);
         snd.play();
         e.target.innerText = labels[nextSound];
