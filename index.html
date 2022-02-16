@@ -10,13 +10,23 @@
         margin: 0;
         padding: 0;
       }
-      button {
+      .play {
         display: block;
         width: 100%;
         height: 100%;
         font-size: 10vw;
         background-color: #f3b9dc;
         color: #b3455e;
+        border: none;
+      }
+      .easter-egg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+        height: 3vw;
+        width: 3vw;
+        background: none;
         border: none;
       }
     </style>
@@ -26,14 +36,14 @@
         "double_kill.wav",
         "triple_kill.wav",
         "killing_spree.wav",
-        "ownage.wav",
         "dominating.wav",
         "mega_kill.wav",
         "unstoppable.wav",
         "wicked_sick.wav",
         "monster_kill.wav",
         "god_like.wav",
-        "holy_shit.wav",
+        "ownage.wav",
+        // "holy_shit.wav",
       ];
       const labels = {
         "first_blood.wav": "First Blood!",
@@ -47,18 +57,23 @@
         "wicked_sick.wav": "Wicked Sick!",
         "monster_kill.wav": "MMMMMMMMMonster Kill!",
         "god_like.wav": "God Like!",
-        "holy_shit.wav": "Holy Something!",
+        "holy_shit.wav": "Holy Shit!",
       }
       function playSound(e) {
-        const nextSound = playlist.shift() || "holy_shit.wav";
+        const nextSound = playlist.shift() || "ownage.wav";
         const snd = new Audio(nextSound);
         snd.play();
         e.target.innerText = labels[nextSound];
+      }
+      function playNaughtySound() {
+        const snd = new Audio("holy_shit.wav");
+        snd.play();
+        document.querySelector(".play").innerText = labels["holy_shit.wav"];
       }
     </script>
   </head>
 
   <body>
-    <button onclick="playSound(event)">打妹妹</button>
+    <button class="play" onclick="playSound(event)">打妹妹</button>
   </body>
 </html>
